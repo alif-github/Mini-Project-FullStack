@@ -1,12 +1,12 @@
-package com.backendapi.project.service;
+package com.backendapi.project.repository;
 
 import com.backendapi.project.model.Product;
 
 import java.util.List;
 
-public interface ProductService {
+public interface ProductRepo {
 
-    //Manifest Place CRUD service, security before repository!
+    //Manifest Place CRUD repository, relations to database!
 
     //Create the Data----------------------------------------
     void saveProduct(Product product);
@@ -17,13 +17,13 @@ public interface ProductService {
     List<Product> findAllProduct();
 
     //Read All Data With Paggination
-    List<Product> findAllProductPagging(int page, int limit);
+    List<Product> findAllProductPagging(int page , int limit);
 
     //Read the Data by id
     Product findByIdProduct(String idProduct);
 
     //Read the Data by name
-    Product findByNameProduct(String product);
+    List<Product> findByNameProduct(String product);
 
     //Update the Data----------------------------------------
     void updateDataProduct(String idProduct, Product product);
@@ -32,8 +32,4 @@ public interface ProductService {
 
     //Delete the Data (1 Data) by id
     void deleteByIdProduct(String idProduct);
-
-    //is Product Exist,-------------------------------------
-    //to check with name of Product parameter
-    boolean isProductExist(Product product);
 }

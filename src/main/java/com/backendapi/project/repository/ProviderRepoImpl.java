@@ -48,6 +48,7 @@ public class ProviderRepoImpl implements ProviderRepo {
         //-------------------------------------------------------------------------------------------------
 
         provider.setIdProvider(newNumberString);
+
         String sql = "INSERT INTO provider(idProvider , provider) VALUES(?,?)";
         databases.update(sql,
                 provider.getIdProvider(),
