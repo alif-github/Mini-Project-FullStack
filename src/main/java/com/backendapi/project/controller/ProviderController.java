@@ -46,8 +46,9 @@ public class ProviderController {
         if (providerList.isEmpty()) {
             logger.error("Unable to show Provider, because empty on Database");
             return new ResponseEntity<>(providerList, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(providerList, HttpStatus.OK);
         }
-        return new ResponseEntity<>(providerList, HttpStatus.OK);
     }
 
     //Show All Data with Pagging--------------------------------------------------------------
@@ -59,8 +60,9 @@ public class ProviderController {
         if (providerList.isEmpty()) {
             logger.error("Unable to show Provider, because empty on Database");
             return new ResponseEntity<>(providerList, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(providerList, HttpStatus.OK);
         }
-        return new ResponseEntity<>(providerList, HttpStatus.OK);
     }
 
     //Show Data By Id-------------------------------------------------------------------------
@@ -72,8 +74,9 @@ public class ProviderController {
         if (provider == null) {
             logger.error("Unable to show Provider, because provider id {} is not found", idProvider);
             return new ResponseEntity<>(new CustomErrorType("Unable to show Provider " + idProvider + " , because not found"), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(provider, HttpStatus.OK);
         }
-        return new ResponseEntity<>(provider, HttpStatus.OK);
     }
 
     //Show Data By Name-----------------------------------------------------------------------
@@ -85,8 +88,9 @@ public class ProviderController {
         if (provider1 == null) {
             logger.error("Unable to show Provider, because provider name {} is not found", provider1);
             return new ResponseEntity<>(new CustomErrorType("Unable to show Provider " + provider + " , because not found"), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(provider1, HttpStatus.OK);
         }
-        return new ResponseEntity<>(provider1, HttpStatus.OK);
     }
 
     //Update Data By Id-----------------------------------------------------------------------

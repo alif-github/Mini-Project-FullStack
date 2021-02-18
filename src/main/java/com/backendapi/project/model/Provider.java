@@ -1,7 +1,13 @@
 package com.backendapi.project.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Provider {
     private String idProvider;
+
+    @NotNull
+    @Size(max = 2)
     private String provider;
 
     public Provider(String idProvider, String provider) {
