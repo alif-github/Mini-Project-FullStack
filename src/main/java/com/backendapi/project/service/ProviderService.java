@@ -16,6 +16,9 @@ public interface ProviderService {
     //Read All Data
     List<Provider> findAllProvider();
 
+    //Read All Data With Paggination
+    List<Provider> findAllProviderPagging(int page, int limit);
+
     //Read the Data by id
     Provider findByIdProvider(String idProvider);
 

@@ -28,6 +28,12 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
+    public List<Provider> findAllProviderPagging(int page , int limit) {
+        List<Provider> providerList = providerRepo.findAllProviderPagging(page, limit);
+        return providerList;
+    }
+
+    @Override
     public Provider findByIdProvider(String idProvider) {
         Provider provider;
         try {

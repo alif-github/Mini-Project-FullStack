@@ -27,9 +27,9 @@ public class ProviderController {
     public ResponseEntity<?> createProvider(@RequestBody Provider provider) {
         logger.info("Creating Provider : {}", provider);
 
-        if(providerService.isProviderExist(provider)) {
+        if (providerService.isProviderExist(provider)) {
             logger.error("Unable to create provider, Provider with name {} already exist", provider.getProvider());
-            return new ResponseEntity<>(new CustomErrorType("Unable to create. Provider with name "+provider.getProvider()+" already exist."), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Provider with name " + provider.getProvider() + " already exist."), HttpStatus.CONFLICT);
         } else {
             providerService.saveProvider(provider);
             Provider providerSave = providerService.findByIdProvider(provider.getIdProvider());
@@ -47,7 +47,20 @@ public class ProviderController {
             logger.error("Unable to show Provider, because empty on Database");
             return new ResponseEntity<>(providerList, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(providerList , HttpStatus.OK);
+        return new ResponseEntity<>(providerList, HttpStatus.OK);
+    }
+
+    //Show All Data with Pagging--------------------------------------------------------------
+    @RequestMapping(value = "/provider/page/", method = RequestMethod.GET)
+    public ResponseEntity<List<Provider>> showProviderPagging(@RequestParam("page") int page, @RequestParam("limit") int limit) {
+        logger.info("Showing Provider ...");
+        List<Provider> providerList = providerService.findAllProviderPagging(page, limit);
+
+        if (providerList.isEmpty()) {
+            logger.error("Unable to show Provider, because empty on Database");
+            return new ResponseEntity<>(providerList, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(providerList, HttpStatus.OK);
     }
 
     //Show Data By Id-------------------------------------------------------------------------
@@ -84,7 +97,7 @@ public class ProviderController {
         Provider beforeUpdateProvider = providerService.findByIdProvider(idProvider);
         if (beforeUpdateProvider == null) {
             logger.error("Unable to show Provider, because provider id {} is not found", idProvider);
-            return new ResponseEntity<>(new CustomErrorType("Unable to show Provider "+idProvider+" , because not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new CustomErrorType("Unable to show Provider " + idProvider + " , because not found"), HttpStatus.NOT_FOUND);
         } else {
             providerService.updateDataProvider(idProvider, provider);
             Provider newUpdateProvider = providerService.findByIdProvider(idProvider);
@@ -100,7 +113,7 @@ public class ProviderController {
         Provider findingId = providerService.findByIdProvider(idProvider);
         if (findingId == null) {
             logger.error("Unable to deleting that Provider, because provider id {} is not found", idProvider);
-            return new ResponseEntity<>(new CustomErrorType("Unable to deleting that Provider "+idProvider+" , because not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new CustomErrorType("Unable to deleting that Provider " + idProvider + " , because not found"), HttpStatus.NOT_FOUND);
         } else {
             providerService.deleteByIdProvider(idProvider);
             return new ResponseEntity<>(HttpStatus.OK);
