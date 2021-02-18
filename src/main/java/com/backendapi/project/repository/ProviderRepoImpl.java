@@ -64,12 +64,6 @@ public class ProviderRepoImpl implements ProviderRepo {
     }
 
     @Override
-    public void deleteAllProvider() {
-        String sql = "DELETE FROM provider";
-        databases.execute(sql);
-    }
-
-    @Override
     public void deleteByIdProvider(String idProvider) {
         String sql = "DELETE FROM provider WHERE provider ='"+idProvider+"'";
     }

@@ -16,41 +16,55 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public void saveProvider(Provider provider) {
-
+        synchronized (this) { //Critical section synchronized
+            providerRepo.saveProvider(provider);
+        }
     }
 
     @Override
     public List<Provider> findAllProvider() {
-        return null;
+        List<Provider> providerList = providerRepo.findAllProvider();
+        return providerList;
     }
 
     @Override
     public Provider findByIdProvider(String idProvider) {
-        return null;
+        Provider provider;
+        try {
+            provider = providerRepo.findByIdProvider(idProvider);
+        } catch (Exception e) {
+            provider = null;
+        }
+        return provider;
     }
 
     @Override
     public Provider findByNameProvider(String provider) {
-        return null;
+        Provider prov;
+        try {
+            prov = (Provider) providerRepo.findByNameProvider(provider).get(0);
+        } catch (Exception e) {
+            prov = null;
+        }
+        return prov;
     }
 
     @Override
     public void updateDataProvider(String idProvider, Provider provider) {
-
-    }
-
-    @Override
-    public void deleteAllProvider() {
-
+        synchronized (this) {
+            providerRepo.updateDataProvider(idProvider , provider);
+        }
     }
 
     @Override
     public void deleteByIdProvider(String idProvider) {
-
+        synchronized (this) {
+            providerRepo.deleteByIdProvider(idProvider);
+        }
     }
 
     @Override
     public boolean isProviderExist(Provider provider) {
-        return false;
+        return providerRepo.findByNameProvider(provider.getProvider()).size() != 0;
     }
 }
