@@ -76,7 +76,7 @@ public class ProductRepoImpl implements ProductRepo {
                 "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
                 "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType ";
 
-        List<Product> productList = databases.query(sql + start + "," + limit + ";",
+        List<Product> productList = databases.query(""+ sql +" LIMIT "+start + "," + limit + ";",
                 (rs, rowNum) ->
                         new Product(
                                 rs.getString("idProduct"),
@@ -98,7 +98,7 @@ public class ProductRepoImpl implements ProductRepo {
                 "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
                 "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType ";
 
-        String sqlForFindId = "SELECT * FROM " + sql + " WHERE idProduct ='" + idProduct + "'";
+        String sqlForFindId = "" + sql + " WHERE idProduct ='" + idProduct + "'";
         return databases.queryForObject(sqlForFindId,
                 (rs, rowNum) ->
                         new Product(
@@ -120,7 +120,7 @@ public class ProductRepoImpl implements ProductRepo {
                 "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
                 "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType ";
 
-        String sqlForFindName = "SELECT * FROM " + sql + " WHERE product LIKE ?";
+        String sqlForFindName = "" + sql + " WHERE product LIKE ?";
         return databases.query(sqlForFindName,
                 new Object[]{product},
                 (rs, rowNum) ->
@@ -161,13 +161,12 @@ public class ProductRepoImpl implements ProductRepo {
 
     @Override
     public void updateDataProduct(String idProduct, Product product) {
-        String sql = "SELECT g.idProduct, g.product, g.value, g.provider, g.stock, g.harga, g.expiredDate, t.type " +
-                "FROM (SELECT p.idProduct, p.product, p.value, v.provider, " +
-                "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
-                "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType ";
+        String sqlUpdate = "UPDATE product SET product = ?, value = ?, idProvider = ?, idType = ?, stock = ?, harga = ?, expiredDate = ? WHERE idProduct = ?;";
 
-        String sqlUpdate = "UPDATE " + sql + " SET product = ?, value = ?, idProvider = ?, idType = ?, stock = ?, harga = ?, expiredDate = ? WHERE idProduct = ?;";
-        databases.update(sqlUpdate, product.getStock(), product.getHarga(), product.getExpiredDate(), idProduct);
+        databases.update(sqlUpdate, product.getProduct(), product.getValue(),
+                product.getIdProvider(), product.getIdType(),
+                product.getStock(), product.getHarga(),
+                product.getExpiredDate(), idProduct);
     }
 
     @Override
