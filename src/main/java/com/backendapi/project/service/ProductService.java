@@ -25,6 +25,9 @@ public interface ProductService {
     //Read the Data by name
     Product findByNameProduct(String product);
 
+    //Read By name provider and name type
+    List<Product> findByNameAndType(String provider , String type);
+
     //Update the Data----------------------------------------
     void updateDataProduct(String idProduct, Product product);
 

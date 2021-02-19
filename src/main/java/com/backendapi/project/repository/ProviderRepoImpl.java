@@ -38,11 +38,11 @@ public class ProviderRepoImpl implements ProviderRepo {
             number = String.valueOf(idNext); //parsing to String
             lengthNumber = number.length(); //sum length
             if (lengthNumber == 2) {
-                newNumberString = "ID"+"0"+number; //Regex own
+                newNumberString = "ID" + "0" + number; //Regex own
             } else if (lengthNumber <= 1) {
-                newNumberString = "ID"+"00"+number; //Regex own
+                newNumberString = "ID" + "00" + number; //Regex own
             } else {
-                newNumberString = "ID"+number; //Regex own
+                newNumberString = "ID" + number; //Regex own
             }
         }
         //-------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ public class ProviderRepoImpl implements ProviderRepo {
     }
 
     @Override
-    public List<Provider> findAllProviderPagging(int page , int limit) {
+    public List<Provider> findAllProviderPagging(int page, int limit) {
         String sql = "SELECT COUNT(provider) as count FROM provider";
         int numberPages;
         numberPages = databases.query(sql,
@@ -75,26 +75,26 @@ public class ProviderRepoImpl implements ProviderRepo {
 
         //validate data page
 
-        if(page < 1) {
+        if (page < 1) {
             page = 1;
         }
-        if(page > numberPages) {
+        if (page > numberPages) {
             page = numberPages;
         }
 
-        int start = (page - 1)*limit;
-        List<Provider> providerList = databases.query("SELECT * FROM provider LIMIT "+start+","+limit+";",
+        int start = (page - 1) * limit;
+        List<Provider> providerList = databases.query("SELECT * FROM provider LIMIT " + start + "," + limit + ";",
                 (rs, rowNum) ->
-                    new Provider(
-                            rs.getString("idProvider"),
-                            rs.getString("provider")
-                    ));
+                        new Provider(
+                                rs.getString("idProvider"),
+                                rs.getString("provider")
+                        ));
         return providerList;
     }
 
     @Override
     public Provider findByIdProvider(String idProvider) {
-        String sql = "SELECT * FROM provider WHERE idProvider ='"+idProvider+"'";
+        String sql = "SELECT * FROM provider WHERE idProvider ='" + idProvider + "'";
         return databases.queryForObject(sql,
                 (rs, rowNum) ->
                         new Provider(
@@ -125,7 +125,7 @@ public class ProviderRepoImpl implements ProviderRepo {
 
     @Override
     public void deleteByIdProvider(String idProvider) {
-        String sql = "DELETE FROM provider WHERE idProvider ='"+idProvider+"'";
+        String sql = "DELETE FROM provider WHERE idProvider ='" + idProvider + "'";
         databases.execute(sql);
     }
 }
