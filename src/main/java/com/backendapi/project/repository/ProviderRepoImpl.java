@@ -107,7 +107,7 @@ public class ProviderRepoImpl implements ProviderRepo {
     public List<Provider> findByNameProvider(String provider) {
         String sql = "SELECT * FROM provider WHERE provider LIKE ?";
         return databases.query(sql,
-                new Object[]{provider},
+                new Object[]{"%"+provider+"%"},
                 (rs, rowNum) ->
                         new Provider(
                                 rs.getString("idProvider"),

@@ -1,7 +1,6 @@
 package com.backendapi.project.controller;
 
 import com.backendapi.project.model.Product;
-import com.backendapi.project.model.Provider;
 import com.backendapi.project.service.ProductService;
 import com.backendapi.project.util.CustomErrorType;
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ public class ProductController {
     public static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
-    ProductService productService; //connect to provider service for CRUD
+    ProductService productService; //connect to product service for CRUD
 
     //Create Category Data--------------------------------------------------------------------
     @RequestMapping(value = "/product/", method = RequestMethod.POST)
@@ -90,6 +89,20 @@ public class ProductController {
             return new ResponseEntity<>(new CustomErrorType("Unable to show Product " + product1 + " , because not found"), HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(product1, HttpStatus.OK);
+        }
+    }
+
+    //Show Data By Name and Type--------------------------------------------------------------
+    @RequestMapping(value = "/product/find/", method = RequestMethod.GET)
+    public ResponseEntity<?> showSingleProductNameAndType(@RequestParam("provider") String idProvider, @RequestParam("type") int idType) {
+        logger.info("Showing Product");
+
+        List<Product> productList = productService.findByNameAndType(idProvider,idType);
+        if (productList == null) {
+            logger.error("Unable to show Product, because provider name {} is not found");
+            return new ResponseEntity<>(new CustomErrorType("Unable to show Product because not found"), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(productList, HttpStatus.OK);
         }
     }
 

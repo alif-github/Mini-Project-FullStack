@@ -33,19 +33,18 @@ public class ProductRepoImpl implements ProductRepo {
 
     @Override
     public List<Product> findAllProduct() {
-        String sql = "SELECT g.idProduct, g.product, g.value, g.provider, g.stock, g.harga, g.expiredDate, t.type " +
-                "FROM (SELECT p.idProduct, p.product, p.value, v.provider, " +
-                "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
-                "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType;";
+        String sql = "select * from product p inner join provider r on p.idProvider = r.idProvider inner join type t on t.idType = p.idType;";
         return databases.query(sql,
                 (rs, rowNum) ->
                         new Product(
                                 rs.getString("idProduct"),
                                 rs.getString("product"),
                                 rs.getString("value"),
-                                rs.getString("provider"),
+                                rs.getString("idProvider"),
+                                rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
+                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
                                 rs.getString("type")
                         ));
@@ -71,10 +70,7 @@ public class ProductRepoImpl implements ProductRepo {
 
         int start = (page - 1) * limit;
 
-        String sql = "SELECT g.idProduct, g.product, g.value, g.provider, g.stock, g.harga, g.expiredDate, t.type " +
-                "FROM (SELECT p.idProduct, p.product, p.value, v.provider, " +
-                "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
-                "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType ";
+        String sql = "select * from product p inner join provider r on p.idProvider = r.idProvider inner join type t on t.idType = p.idType ";
 
         List<Product> productList = databases.query(""+ sql +" LIMIT "+start + "," + limit + ";",
                 (rs, rowNum) ->
@@ -82,9 +78,11 @@ public class ProductRepoImpl implements ProductRepo {
                                 rs.getString("idProduct"),
                                 rs.getString("product"),
                                 rs.getString("value"),
-                                rs.getString("provider"),
+                                rs.getString("idProvider"),
+                                rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
+                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
                                 rs.getString("type")
                         ));
@@ -93,10 +91,7 @@ public class ProductRepoImpl implements ProductRepo {
 
     @Override
     public Product findByIdProduct(String idProduct) {
-        String sql = "SELECT g.idProduct, g.product, g.value, g.provider, g.stock, g.harga, g.expiredDate, t.type " +
-                "FROM (SELECT p.idProduct, p.product, p.value, v.provider, " +
-                "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
-                "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType ";
+        String sql = "select * from product p inner join provider r on p.idProvider = r.idProvider inner join type t on t.idType = p.idType ";
 
         String sqlForFindId = "" + sql + " WHERE idProduct ='" + idProduct + "'";
         return databases.queryForObject(sqlForFindId,
@@ -105,9 +100,11 @@ public class ProductRepoImpl implements ProductRepo {
                                 rs.getString("idProduct"),
                                 rs.getString("product"),
                                 rs.getString("value"),
-                                rs.getString("provider"),
+                                rs.getString("idProvider"),
+                                rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
+                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
                                 rs.getString("type")
                         ));
@@ -115,10 +112,7 @@ public class ProductRepoImpl implements ProductRepo {
 
     @Override
     public List<Product> findByNameProduct(String product) {
-        String sql = "SELECT g.idProduct, g.product, g.value, g.provider, g.stock, g.harga, g.expiredDate, t.type " +
-                "FROM (SELECT p.idProduct, p.product, p.value, v.provider, " +
-                "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
-                "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType ";
+        String sql = "select * from product p inner join provider r on p.idProvider = r.idProvider inner join type t on t.idType = p.idType ";
 
         String sqlForFindName = "" + sql + " WHERE product LIKE ?";
         return databases.query(sqlForFindName,
@@ -128,35 +122,40 @@ public class ProductRepoImpl implements ProductRepo {
                                 rs.getString("idProduct"),
                                 rs.getString("product"),
                                 rs.getString("value"),
-                                rs.getString("provider"),
+                                rs.getString("idProvider"),
+                                rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
+                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
                                 rs.getString("type")
                         ));
     }
 
     @Override
-    public List<Product> findByNameAndType(String provider, String type) {
-        String sql = "SELECT g.idProduct, g.product, g.value, g.provider, g.stock, g.harga, g.expiredDate, t.type " +
-                "FROM (SELECT p.idProduct, p.product, p.value, v.provider, " +
-                "p.idType, p.stock, p.harga, p.expiredDate FROM product p INNER JOIN " +
-                "provider v ON p.idProvider = v.idProvider) g INNER JOIN type t ON g.idType = t.idType ";
+    public List<Product> findByNameAndType(String idProvider, int idType) {
 
-        String sqlForFindNameNType = "SELECT * FROM " + sql + " WHERE product LIKE ? AND type LIKE ?";
+        String sqlForFindNameNType = "select * from product p inner join provider r on p.idProvider = r.idProvider " +
+                "inner join type t on t.idType = p.idType AND p.idProvider = '"+idProvider+"' AND p.idType = '"+idType+"'";
         return databases.query(sqlForFindNameNType,
-                new Object[]{provider, type},
                 (rs, rowNum) ->
                         new Product(
                                 rs.getString("idProduct"),
                                 rs.getString("product"),
                                 rs.getString("value"),
-                                rs.getString("provider"),
+                                rs.getString("idProvider"),
+                                rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
+                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
                                 rs.getString("type")
                         ));
+    }
+
+    @Override
+    public List<Product> findByIdProvider(String idProvider) {
+        return null;
     }
 
     @Override

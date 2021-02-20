@@ -29,16 +29,29 @@ public class Product {
         this.expiredDate = expiredDate;
     }
 
-    public Product(String idProduct, String product, String value, String provider , int stock, double harga, String expiredDate , String type) {
+    public Product(String idProduct, String product, String value, String idProvider, int idType, int stock, double harga, String expiredDate, String provider, String type) {
         this.idProduct = idProduct;
         this.product = product;
         this.value = value;
-        this.provider = provider;
+        this.idProvider = idProvider;
+        this.idType = idType;
         this.stock = stock;
         this.harga = harga;
         this.expiredDate = expiredDate;
+        this.provider = provider;
         this.type = type;
     }
+
+//    public Product(String idProduct, String product, String value, String provider , int stock, double harga, String expiredDate , String type) {
+//        this.idProduct = idProduct;
+//        this.product = product;
+//        this.value = value;
+//        this.provider = provider;
+//        this.stock = stock;
+//        this.harga = harga;
+//        this.expiredDate = expiredDate;
+//        this.type = type;
+//    }
 
     public String getIdProduct() {
         return idProduct;

@@ -26,7 +26,10 @@ public interface ProductRepo {
     List<Product> findByNameProduct(String product);
 
     //Read By name provider and name type
-    List<Product> findByNameAndType(String provider , String type);
+    List<Product> findByNameAndType(String idProvider , int idType);
+
+    //Read By id Provider
+    List<Product> findByIdProvider(String idProvider);
 
     //Update the Data----------------------------------------
     void updateDataProduct(String idProduct, Product product);

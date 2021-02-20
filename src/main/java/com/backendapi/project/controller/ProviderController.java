@@ -1,6 +1,8 @@
 package com.backendapi.project.controller;
 
+import com.backendapi.project.model.Product;
 import com.backendapi.project.model.Provider;
+import com.backendapi.project.service.ProductService;
 import com.backendapi.project.service.ProviderService;
 import com.backendapi.project.util.CustomErrorType;
 import org.slf4j.Logger;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class ProviderController {
@@ -21,6 +23,9 @@ public class ProviderController {
 
     @Autowired
     ProviderService providerService; //connect to provider service for CRUD
+
+    @Autowired
+    ProductService productService; //connect to product service for CRUD
 
     //Create Category Data--------------------------------------------------------------------
     @RequestMapping(value = "/provider/", method = RequestMethod.POST)
@@ -113,8 +118,10 @@ public class ProviderController {
     @RequestMapping(value = "/provider/id/", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteSingleProviderById(@RequestParam("id") String idProvider) {
         logger.info("Delete Provider with id {} ...", idProvider);
-
         Provider findingId = providerService.findByIdProvider(idProvider);
+
+
+
         if (findingId == null) {
             logger.error("Unable to deleting that Provider, because provider id {} is not found", idProvider);
             return new ResponseEntity<>(new CustomErrorType("Unable to deleting that Provider " + idProvider + " , because not found"), HttpStatus.NOT_FOUND);
