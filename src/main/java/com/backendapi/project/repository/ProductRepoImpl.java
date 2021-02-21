@@ -44,8 +44,8 @@ public class ProductRepoImpl implements ProductRepo {
                                 rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
-                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
+                                rs.getString("provider"),
                                 rs.getString("type")
                         ));
     }
@@ -82,8 +82,8 @@ public class ProductRepoImpl implements ProductRepo {
                                 rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
-                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
+                                rs.getString("provider"),
                                 rs.getString("type")
                         ));
         return productList;
@@ -104,8 +104,8 @@ public class ProductRepoImpl implements ProductRepo {
                                 rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
-                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
+                                rs.getString("provider"),
                                 rs.getString("type")
                         ));
     }
@@ -126,8 +126,8 @@ public class ProductRepoImpl implements ProductRepo {
                                 rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
-                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
+                                rs.getString("provider"),
                                 rs.getString("type")
                         ));
     }
@@ -147,15 +147,31 @@ public class ProductRepoImpl implements ProductRepo {
                                 rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
-                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
+                                rs.getString("provider"),
                                 rs.getString("type")
                         ));
     }
 
     @Override
     public List<Product> findByIdProvider(String idProvider) {
-        return null;
+        String sql = "select * from product p inner join provider r on p.idProvider = r.idProvider inner join type t on t.idType = p.idType ";
+
+        String sqlForFindId = "" + sql + " WHERE p.idProvider ='" + idProvider + "'";
+        return databases.query(sqlForFindId,
+                (rs, rowNum) ->
+                        new Product(
+                                rs.getString("idProduct"),
+                                rs.getString("product"),
+                                rs.getString("value"),
+                                rs.getString("idProvider"),
+                                rs.getInt("idType"),
+                                rs.getInt("stock"),
+                                rs.getDouble("harga"),
+                                rs.getString("expiredDate"),
+                                rs.getString("provider"),
+                                rs.getString("type")
+                        ));
     }
 
     @Override

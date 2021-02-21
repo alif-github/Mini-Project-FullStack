@@ -56,7 +56,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findByIdProvider(String idProvider) {
-        return null;
+        List<Product> productList;
+        try {
+            productList = productRepo.findByIdProvider(idProvider);
+        } catch (Exception e) {
+            productList = null;
+        }
+        return productList;
     }
 
     @Override

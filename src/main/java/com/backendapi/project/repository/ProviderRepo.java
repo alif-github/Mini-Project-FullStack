@@ -32,4 +32,7 @@ public interface ProviderRepo {
 
     //Delete the Data (1 Data) by id
     void deleteByIdProvider(String idProvider);
+
+    //API for Pagination
+    int countingProviderRows();
 }

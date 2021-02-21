@@ -36,8 +36,9 @@ public class TransactionRepoImpl implements TransactionRepo {
         for (int i = 0; i < productList.size(); i++) {
             String idRandomDetail = UUID.randomUUID().toString();
             String idRandomDetailTRD = "TRD - " + idRandomDetail;
-            String sqlDetail = "INSERT INTO transactiondetail(idTransactionDetail,idTransaction,idProduct) VALUES(?,?,?)";
-            databases.update(sqlDetail, idRandomDetailTRD, transaction.getIdTransaction(), productList.get(i).getIdProduct());
+            String sqlDetail = "INSERT INTO transactiondetail(idTransactionDetail,idTransaction,idProduct,qty,total) VALUES(?,?,?,?,?)";
+            databases.update(sqlDetail, idRandomDetailTRD, transaction.getIdTransaction(),
+                    productList.get(i).getIdProduct(), productList.get(i).getQty(), productList.get(i).getTotal());
         }
 
     }
@@ -72,9 +73,11 @@ public class TransactionRepoImpl implements TransactionRepo {
                                     rs.getInt("idType"),
                                     rs.getInt("stock"),
                                     rs.getDouble("harga"),
-                                    rs.getString("provider"),
                                     rs.getString("expiredDate"),
-                                    rs.getString("type")
+                                    rs.getString("provider"),
+                                    rs.getString("type"),
+                                    rs.getInt("qty"),
+                                    rs.getDouble("total")
                             )));
         }
         return transactionList;
@@ -121,9 +124,11 @@ public class TransactionRepoImpl implements TransactionRepo {
                                     rs.getInt("idType"),
                                     rs.getInt("stock"),
                                     rs.getDouble("harga"),
-                                    rs.getString("provider"),
                                     rs.getString("expiredDate"),
-                                    rs.getString("type")
+                                    rs.getString("provider"),
+                                    rs.getString("type"),
+                                    rs.getInt("qty"),
+                                    rs.getDouble("total")
                             )));
         }
         return transactionList;
@@ -158,9 +163,11 @@ public class TransactionRepoImpl implements TransactionRepo {
                                 rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
-                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
-                                rs.getString("type")
+                                rs.getString("provider"),
+                                rs.getString("type"),
+                                rs.getInt("qty"),
+                                rs.getDouble("total")
                         )));
 
         return transaction;
@@ -196,9 +203,11 @@ public class TransactionRepoImpl implements TransactionRepo {
                                 rs.getInt("idType"),
                                 rs.getInt("stock"),
                                 rs.getDouble("harga"),
-                                rs.getString("provider"),
                                 rs.getString("expiredDate"),
-                                rs.getString("type")
+                                rs.getString("provider"),
+                                rs.getString("type"),
+                                rs.getInt("qty"),
+                                rs.getDouble("total")
                         )));
 
         return transaction;
@@ -225,8 +234,9 @@ public class TransactionRepoImpl implements TransactionRepo {
         for (int i = 0; i < productList.size(); i++) {
             String idRandomDetail = UUID.randomUUID().toString();
             String idRandomDetailTRD = "TRD - " + idRandomDetail;
-            String sqlDetail = "INSERT INTO transactiondetail(idTransactionDetail,idTransaction,idProduct) VALUES(?,?,?)";
-            databases.update(sqlDetail, idRandomDetailTRD, idTransactionTemp, productList.get(i).getIdProduct());
+            String sqlDetail = "INSERT INTO transactiondetail(idTransactionDetail,idTransaction,idProduct,qty) VALUES(?,?,?,?)";
+            databases.update(sqlDetail, idRandomDetailTRD, idTransactionTemp,
+                    productList.get(i).getIdProduct(), productList.get(i).getQty());
         }
     }
 

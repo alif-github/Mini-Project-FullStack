@@ -1,7 +1,9 @@
 package com.backendapi.project.controller;
 
 import com.backendapi.project.model.Product;
+import com.backendapi.project.model.Transaction;
 import com.backendapi.project.service.ProductService;
+import com.backendapi.project.service.TransactionService;
 import com.backendapi.project.util.CustomErrorType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class ProductController {
@@ -20,6 +23,9 @@ public class ProductController {
 
     @Autowired
     ProductService productService; //connect to product service for CRUD
+
+    @Autowired
+    TransactionService transactionService; //connect to transaction service for CRUD
 
     //Create Category Data--------------------------------------------------------------------
     @RequestMapping(value = "/product/", method = RequestMethod.POST)
@@ -128,6 +134,7 @@ public class ProductController {
         logger.info("Delete Product with id {} ...", idProduct);
 
         Product findingId = productService.findByIdProduct(idProduct);
+
         if (findingId == null) {
             logger.error("Unable to deleting that Product, because product id {} is not found", idProduct);
             return new ResponseEntity<>(new CustomErrorType("Unable to deleting that Product " + idProduct + " , because not found"), HttpStatus.NOT_FOUND);

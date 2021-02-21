@@ -33,6 +33,9 @@ public interface ProviderService {
     //Delete the Data (1 Data) by id
     void deleteByIdProvider(String idProvider);
 
+    //API for Pagination
+    int countingProviderRows();
+
     //is Provider Exist,-------------------------------------
     //to check with name of Provider parameter
     boolean isProviderExist(Provider provider);

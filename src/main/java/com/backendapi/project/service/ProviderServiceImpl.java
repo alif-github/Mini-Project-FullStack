@@ -70,6 +70,12 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
+    public int countingProviderRows() {
+        int count = providerRepo.countingProviderRows();
+        return count;
+    }
+
+    @Override
     public boolean isProviderExist(Provider provider) {
         return providerRepo.findByNameProvider(provider.getProvider()).size() != 0;
     }

@@ -15,6 +15,10 @@ public class Product {
     private String provider;
     private String type;
 
+    //for manipulate data
+    private int qty;
+    private double total;
+
     public Product() {
     }
 
@@ -40,6 +44,21 @@ public class Product {
         this.expiredDate = expiredDate;
         this.provider = provider;
         this.type = type;
+    }
+
+    public Product(String idProduct, String product, String value, String idProvider, int idType, int stock, double harga, String expiredDate, String provider, String type, int qty, double total) {
+        this.idProduct = idProduct;
+        this.product = product;
+        this.value = value;
+        this.idProvider = idProvider;
+        this.idType = idType;
+        this.stock = stock;
+        this.harga = harga;
+        this.expiredDate = expiredDate;
+        this.provider = provider;
+        this.type = type;
+        this.qty = qty;
+        this.total = total;
     }
 
 //    public Product(String idProduct, String product, String value, String provider , int stock, double harga, String expiredDate , String type) {
@@ -109,6 +128,22 @@ public class Product {
         this.type = type;
     }
 
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public double getTotal() {
+        return getQty()*getHarga();
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -146,6 +181,8 @@ public class Product {
                 ", expiredDate='" + expiredDate + '\'' +
                 ", provider='" + provider + '\'' +
                 ", type='" + type + '\'' +
+                ", qty=" + qty +
+                ", total=" + total +
                 '}';
     }
 }

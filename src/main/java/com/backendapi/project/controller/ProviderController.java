@@ -98,19 +98,33 @@ public class ProviderController {
         }
     }
 
+    //Show Count Data-------------------------------------------------------------------------
+    @RequestMapping(value = "/provider/count/", method = RequestMethod.GET)
+    public ResponseEntity<?> countProvider() {
+        logger.info("Showing Provider ...");
+        int provider = providerService.countingProviderRows();
+
+        return new ResponseEntity<>(provider, HttpStatus.OK);
+    }
+
     //Update Data By Id-----------------------------------------------------------------------
     @RequestMapping(value = "/provider/id/", method = RequestMethod.PUT)
     public ResponseEntity<?> updateSingleProvider(@RequestParam("id") String idProvider, @RequestBody Provider provider) {
         logger.info("Showing Provider with id {} ...", idProvider);
 
         Provider beforeUpdateProvider = providerService.findByIdProvider(idProvider);
+        List<Product> anyProvider = productService.findByIdProvider(idProvider);
+
         if (beforeUpdateProvider == null) {
             logger.error("Unable to show Provider, because provider id {} is not found", idProvider);
             return new ResponseEntity<>(new CustomErrorType("Unable to show Provider " + idProvider + " , because not found"), HttpStatus.NOT_FOUND);
-        } else {
+        } else if (anyProvider.size() <= 0){
             providerService.updateDataProvider(idProvider, provider);
             Provider newUpdateProvider = providerService.findByIdProvider(idProvider);
             return new ResponseEntity<>(newUpdateProvider, HttpStatus.OK);
+        } else {
+            logger.error("Unable to updating that Provider, because still use in other table");
+            return new ResponseEntity<>(new CustomErrorType("Unable to updating that Provider " + idProvider + " , because used in other"), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -119,15 +133,17 @@ public class ProviderController {
     public ResponseEntity<?> deleteSingleProviderById(@RequestParam("id") String idProvider) {
         logger.info("Delete Provider with id {} ...", idProvider);
         Provider findingId = providerService.findByIdProvider(idProvider);
-
-
+        List<Product> anyProvider = productService.findByIdProvider(idProvider);
 
         if (findingId == null) {
             logger.error("Unable to deleting that Provider, because provider id {} is not found", idProvider);
             return new ResponseEntity<>(new CustomErrorType("Unable to deleting that Provider " + idProvider + " , because not found"), HttpStatus.NOT_FOUND);
-        } else {
+        } else if (anyProvider.size() <= 0) {
             providerService.deleteByIdProvider(idProvider);
             return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            logger.error("Unable to deleting that Provider, because still use in other table");
+            return new ResponseEntity<>(new CustomErrorType("Unable to deleting that Provider " + idProvider + " , because used in other"), HttpStatus.BAD_REQUEST);
         }
     }
 }

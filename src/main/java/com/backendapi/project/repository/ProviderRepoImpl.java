@@ -128,4 +128,12 @@ public class ProviderRepoImpl implements ProviderRepo {
         String sql = "DELETE FROM provider WHERE idProvider ='" + idProvider + "'";
         databases.execute(sql);
     }
+
+    @Override
+    public int countingProviderRows() {
+        String sql = "SELECT COUNT(provider) as count FROM provider";
+        int result = databases.queryForObject(
+                sql, Integer.class);
+        return result;
+    }
 }
