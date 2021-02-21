@@ -17,6 +17,7 @@ class Product extends Component {
             value: "",
             stock: "",
             harga: "",
+            expiredDate: "",
             page: 1
          }
     }
@@ -48,6 +49,74 @@ class Product extends Component {
                 .catch(
                     console.log("data tidak ada!")
                 )
+    }
+
+    findByName = el => {
+        const productName = el.target.value;
+
+        if (productName === "") {
+            this.paggination(this.state.page)
+        } else {
+            fetch("http://localhost:8080/api/product/name/?name="+productName+"")
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        let productItemsTemp = []
+                        productItemsTemp.push(result)
+                        this.setState({
+                        isLoaded: true,
+                        productItems: productItemsTemp
+                        });
+                    },
+                    // Note: it's important to handle errors here
+                    // instead of a catch() block so that we don't swallow
+                    // exceptions from actual bugs in components.
+                    (error) => {
+                        this.setState({
+                            isLoaded: true,
+                            error
+                        });
+                    }
+                )
+                .catch(
+                    console.log("data tidak ada!")
+                )
+        }
+    }
+
+    updateApi = () => {
+        let productTemp = this.state.product
+        let valueTemp = this.state.value
+        let idProviderTemp = this.state.idProvider
+        let idTypeTemp = this.state.idType
+        let stockTemp = this.state.stock
+        let hargaTemp = this.state.harga
+        let expiredDateTemp = this.state.expiredDate
+
+        let idProductTemp = this.state.update.idProduct
+        
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                idProduct: '',
+                product: '' + productTemp + '',
+                value: '' + valueTemp + '',
+                idProvider: '' + idProviderTemp + '',
+                idType: '' + idTypeTemp + '',
+                stock: '' + stockTemp + '',
+                harga: '' + hargaTemp + '',
+                expiredDate: '' + expiredDateTemp + '' 
+            })
+        };
+        fetch('http://localhost:8080/api/product/id/?id='+idProductTemp+'', requestOptions)
+            .then(response => response.json())
+            .then((result) => {
+                // do what you want with the response here
+                if (result.errorMessage) alert(result.errorMessage)
+                else alert("Success updating , now to be "+productTemp+"")
+            })
+            .catch();
     }
 
     deleteApi = idProduct => {
@@ -418,7 +487,7 @@ class Product extends Component {
                                                                             <div className="container-input-bawah">
                                                                                 <div className="container-input-bawah-1">
                                                                                     <label className="label-input"><span className="title-input">Product:</span></label>
-                                                                                    <input className="form-control inputan2" name="product" type="text" placeholder="Input New Product" value={this.state.update.product} aria-label="default input example" onChange={this.setValue}/>
+                                                                                    <input className="form-control inputan2" name="product" type="text" placeholder="Input New Product" aria-label="default input example" onChange={this.setValue}/>
                                                                                 </div>
                                                                                 <div className="container-input-bawah-2">
                                                                                     <label className="label-input"><span className="title-input">Value:</span></label>
@@ -443,7 +512,7 @@ class Product extends Component {
                                                                     </div>
                                                                     <div className="modal-footer">
                                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        <button type="button" className="btn btn-primary" onClick={() => {this.tambahApi();this.paggination(page)}} data-bs-dismiss="modal">Update</button>
+                                                                        <button type="button" className="btn btn-primary" onClick={() => {this.updateApi();this.paggination(page)}} data-bs-dismiss="modal">Update</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
