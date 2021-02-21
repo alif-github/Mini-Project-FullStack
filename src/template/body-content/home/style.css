@@ -1,0 +1,16 @@
+.image {
+    width: 70vh;
+    border-radius: 2%;
+}
+
+.home-container {
+    display: flex;
+    margin-top: 20vh;
+    margin-left: 25vh;
+}
+
+.title-image-container {
+    width: 80vh;
+    text-align: left;
+    margin-left: 5vh;
+}

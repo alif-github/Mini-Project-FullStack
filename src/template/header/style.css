@@ -1,0 +1,12 @@
+.container-header {
+    width: 100%;
+    height: 8vh;
+    padding-top: 1.5vh;
+    background-color: #212121;
+    text-align: left;
+}
+
+.title-header-content {
+    color: white;
+    margin-left: 15vh;
+}

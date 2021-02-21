@@ -1,0 +1,72 @@
+.container-provider {
+    width: 80%;
+    margin: auto;
+    margin-right: 17vh;
+    margin-top: 8%;
+}
+
+.edit-provider , .hapus-provider {
+    font-size: small;
+    height: min-content;
+    padding: 5px;
+    margin-left: 0.8vh;
+    margin-right: 0.8vh;
+}
+
+.find-provider {
+    float: left;
+    width: 151vh;
+    margin-right: 7vh;
+}
+
+.find-add {
+    float: left;
+}
+
+.inputan1 , .inputan2 {
+    margin: auto;
+    margin-top: 2vh;
+}
+
+.label-input-i {
+    text-align: left;
+    margin-top: 2vh;
+}
+
+.container-input-atas {
+    width: 100%;
+}
+
+.container-input-kiri {
+    float: left;
+    width: 50%;
+    margin-right: 10%;
+    margin-bottom: 2vh;
+} 
+
+.container-input-kanan {
+    float: left;
+    width: 40%;
+    margin-bottom: 2vh;
+}
+
+.container-input-bawah-1, .container-input-bawah-2, .container-input-bawah-3, .container-input-bawah-4 {
+    margin-bottom: 2vh;
+}
+
+.container-input-bawah-a {
+    width: 100%;
+}
+
+.container-input-bawah-3, .container-input-bawah-4 {
+    float: left;
+    width: 40%;
+}
+
+.container-input-bawah-3 {
+    margin-right: 10%;
+}
+
+.container-input-bawah-3 {
+    width: 50%;
+}

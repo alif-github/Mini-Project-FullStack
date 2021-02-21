@@ -1,0 +1,33 @@
+.container-provider {
+    width: 70%;
+    margin: auto;
+    margin-right: 17vh;
+    margin-top: 8%;
+}
+
+.edit-provider , .hapus-provider {
+    font-size: small;
+    height: min-content;
+    margin-left: 0.8vh;
+    margin-right: 0.8vh;
+}
+
+.find-provider {
+    float: left;
+    width: 130vh;
+    margin-right: 7vh;
+}
+
+.find-add {
+    float: left;
+}
+
+.inputan1 , .inputan2 {
+    margin: auto;
+    margin-top: 2vh;
+}
+
+.label-input-i {
+    text-align: left;
+    margin-top: 2vh;
+}

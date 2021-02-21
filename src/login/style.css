@@ -1,0 +1,27 @@
+.container-login {
+    width: 50%;
+    height: 50%;
+    border: 1px solid black;
+    padding: 4vh;
+    margin: auto;
+    border-radius: 4vh;
+    margin-top: 25vh;
+    background-color: grey;
+    color: white;
+}
+
+.login-title {
+    margin-bottom: 5vh;
+}
+
+.login {
+    width: 100%;
+}
+
+.label {
+    text-align: left;
+}
+
+.button-container {
+    margin-top: 2vh;
+}

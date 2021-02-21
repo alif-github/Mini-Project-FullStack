@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, link } from 'react-router-dom'
 import './style.css'
 
 
@@ -8,88 +9,53 @@ class Nav extends Component {
         this.state = {  }
     }
     render() { 
+        console.log("currentPage : ", this.props.page)
+        const { changePage } = this.props
+
         return ( 
             <div>
                 <nav className="main-menu">
                     <ul>
-                        <li>
-                            <a href="http://justinfarrow.com">
-                                <i class="fa fa-home fa-2x"></i>
-                                <span class="nav-text">
-                                    Dashboard
+                        <Link to="/home">
+                            <li>
+                                <i className="fa fa-home fa-2x"></i>
+                                <span className="nav-text">
+                                    Home
                                 </span>
-                            </a>
-                        </li>
-                        <li class="has-subnav">
-                            <a href="#">
-                                <i class="fa fa-laptop fa-2x"></i>
-                                <span class="nav-text">
-                                    Stars Components
+                            </li>
+                        </Link>
+                        <Link to="/provider">
+                            <hr></hr>
+                            <li className="has-subnav">
+                                <i className="fa fa-folder fa-2x" aria-hidden="true"></i>
+                                <span className="nav-text">
+                                    Provider
                                 </span>
-                            </a>
-                        </li>
-                        <li class="has-subnav">
-                            <a href="#">
-                            <i class="fa fa-list fa-2x"></i>
-                                <span class="nav-text">
-                                    Forms
+                            </li>
+                        </Link>
+                        <Link to="/product">
+                            <li className="has-subnav">
+                                <i className="fa fa-folder fa-2x" aria-hidden="true"></i>
+                                <span className="nav-text">
+                                    Product
                                 </span>
-                            </a>
-                        </li>
-                        <li class="has-subnav">
-                            <a href="#">
-                                <i class="fa fa-folder-open fa-2x"></i>
-                                <span class="nav-text">
-                                    Pages
+                            </li>
+                        </Link>
+                        <Link>                    
+                            <hr></hr>
+                            <li className="has-subnav">
+                                <i className="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+                                <span className="nav-text">
+                                    Transaction
                                 </span>
-                            </a> 
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-bar-chart-o fa-2x"></i>
-                                <span class="nav-text">
-                                    Graphs and Statistics
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-font fa-2x"></i>
-                                <span class="nav-text">
-                                    Quotes
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-table fa-2x"></i>
-                                <span class="nav-text">
-                                    Tables
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-map-marker fa-2x"></i>
-                                <span class="nav-text">
-                                    Maps
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-info fa-2x"></i>
-                                <span class="nav-text">
-                                    Documentation
-                                </span>
-                            </a>
-                        </li>
+                            </li>
+                        </Link>
                     </ul>
                     <ul className="logout">
                         <li>
                             <a href="#">
-                                <i class="fa fa-power-off fa-2x"></i>
-                                <span class="nav-text">
+                                <i className="fa fa-power-off fa-2x"></i>
+                                <span className="nav-text">
                                     Logout
                                 </span>
                             </a>
