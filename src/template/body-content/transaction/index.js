@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PagginationProv from './paggination'
 import './style.css'
 
 class Transaction extends Component {
@@ -7,12 +8,37 @@ class Transaction extends Component {
         this.state = { 
             error: null,
             isLoaded: false,
-            transactionItems: []
+            transactionItems: [],
+            page: 1
          }
     }
 
+    paggination = page => {
+        console.log("http://localhost:8080/api/transaction/page/?page="+page+"&limit=3s")
+
+        fetch("http://localhost:8080/api/transaction/page/?page="+page+"&limit=3")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                      isLoaded: true,
+                      transactionItems: result
+                    });
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+
     componentDidMount() {
-        fetch("http://localhost:8080/api/transaction/page/?page=1&limit=4")
+        fetch("http://localhost:8080/api/transaction/page/?page=1&limit=3")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -34,7 +60,7 @@ class Transaction extends Component {
     }
 
     render() { 
-        const { error , isLoaded , transactionItems } = this.state
+        const { error , isLoaded , transactionItems , page } = this.state
 
         //if error
 
@@ -116,6 +142,9 @@ class Transaction extends Component {
                                             <th className="tText">transactionDate</th>
                                             <th className="tText">phoneNumber</th>
                                             <th className="tText">productList</th>
+                                            <th className="tText">product</th>
+                                            <th className="tText">provider</th>
+                                            <th className="tText">type</th>
                                             <th className="tText">price</th>
                                             <th className="tText">qty</th>
                                             <th className="tText">total</th>
@@ -129,19 +158,22 @@ class Transaction extends Component {
                                                     <td>{item.transactionDate}</td>
                                                     <td>{item.phoneNumber}</td>
                                                     <td>{item.productList[0].idProduct}</td>
+                                                    <td>{item.productList[0].product}</td>
+                                                    <td>{item.productList[0].provider}</td>
+                                                    <td>{item.productList[0].type}</td>
                                                     <td>{item.productList[0].harga}</td>
                                                     <td>{item.productList[0].qty}</td>
                                                     <td>{item.productList[0].total}</td>
                                                     <td>
-                                                        <button type="button" className="btn btn-warning edit-provider" data-bs-toggle="modal" data-bs-target="#exampleModal9">Edit</button>
-                                                        <button type="button" className="btn btn-danger hapus-provider">Hapus</button>
+                                                        {/* <button type="button" className="btn btn-warning edit-provider" data-bs-toggle="modal" data-bs-target="#exampleModal9">Edit</button>
+                                                        <button type="button" className="btn btn-danger hapus-provider">Hapus</button> */}
                                                     </td>
                                                 </tr>
                                             ))}
                                     </tbody>
                                 </table>
                                 <div className="paggination-section">
-                                    {/* <PagginationProv page={this.page} paggination={this.paggination}/> */}
+                                    <PagginationProv page={this.page} paggination={this.paggination}/>
                                 </div>
                             </div>
                         </div>
