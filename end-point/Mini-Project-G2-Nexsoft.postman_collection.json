@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "3a10769e-db5e-4cb8-b894-01b0fcb6a2fc",
+		"name": "Mini-Project-G2-Nexsoft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Provider",
+			"item": [
+				{
+					"name": "input new provider",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"provider\":\"Esia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/provider/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"provider",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show all provider",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/provider/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"provider",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show provider by id provider",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/provider/id/?id=ID005",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"provider",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "ID005"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show all provider with pagging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/provider/page/?page=1&limit=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"provider",
+								"page",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show provider by name provider",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/provider/name/?name=AXIS",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"provider",
+								"name",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "AXIS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "count the rows provider",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/provider/count/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"provider",
+								"count",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update provider by id provider",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idProvider\":\"ID002\",\r\n    \"provider\":\"AXIS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/provider/id/?id=ID002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"provider",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "ID002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete provider by id provider",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/provider/id/?id=ID008",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"provider",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "ID008"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "input new product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": \"XL-Senangnya Nyata\",\r\n    \"value\": \"60K\",\r\n    \"idProvider\":\"ID001\",\r\n    \"idType\":1,\r\n    \"stock\":70,\r\n    \"harga\":20000,\r\n    \"expiredDate\": \"2022/02/22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/product/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show all product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/product/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show all product with pagging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/product/page/?page=2&limit=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"page",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show product by id product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/product/id/?id=d666c177-8c44-4704-ac7f-896f005e8b56",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "d666c177-8c44-4704-ac7f-896f005e8b56"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show product by name product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/product/name/?name=XL-HotRod 4G Plus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"name",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "XL-HotRod 4G Plus"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show product by provider and type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/product/find/?provider=ID001&type=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"find",
+								""
+							],
+							"query": [
+								{
+									"key": "provider",
+									"value": "ID001"
+								},
+								{
+									"key": "type",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product by id product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": \"XL-HotRod 5g\",\r\n    \"value\": \"50K\",\r\n    \"idProvider\":\"ID001\",\r\n    \"idType\":2,\r\n    \"stock\":50,\r\n    \"harga\":30000,\r\n    \"expiredDate\": \"2022/02/10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/product/id/?id=90cebf38-80a9-4007-abd8-44ae056b7693",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "90cebf38-80a9-4007-abd8-44ae056b7693"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product by id product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/product/id/?id=90cebf38-80a9-4007-abd8-44ae056b7693",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "90cebf38-80a9-4007-abd8-44ae056b7693"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "input new transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phoneNumber\":\"08888888881\",\r\n    \"productList\":[\r\n        {\r\n            \"idProduct\":\"9e2de324-84cd-4f05-9402-e2c6a52ff131\",\r\n            \"qty\":2\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/transaction/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show all transaction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/transaction/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show all transaction with pagging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/transaction/page/?page=1&limit=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transaction",
+								"page",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show transaction by id transaction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/transaction/id/?id=TRX - 1e18a803-c7e9-4fd2-b335-f0132d1c5e9d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transaction",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "TRX - 1e18a803-c7e9-4fd2-b335-f0132d1c5e9d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show transaction by phone number",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idTransaction\": \"TRX - b0006c0a-f17d-409c-a9c4-38a3ed92b4f3\",\r\n    \"transactionDate\": \"Sat Feb 20 19:50:25 ICT 2021\",\r\n    \"phoneNumber\":\"08787947569\",\r\n    \"productList\":[\r\n        {\r\n            \"idProduct\":\"d666c177-8c44-4704-ac7f-896f005e8b56\",\r\n            \"qty\":4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/transaction/update/id/?id=TRX - b0006c0a-f17d-409c-a9c4-38a3ed92b4f3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transaction",
+								"update",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "TRX - b0006c0a-f17d-409c-a9c4-38a3ed92b4f3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete transaction by id transaction",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/transaction/id/?id=TRX - 84d3708f-59e6-4126-a2f2-f1746b4d439d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transaction",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "TRX - 84d3708f-59e6-4126-a2f2-f1746b4d439d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
