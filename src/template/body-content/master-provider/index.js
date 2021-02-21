@@ -249,14 +249,8 @@ class Provider extends Component {
     // }
 
     render() { 
-        console.log("page saat ini :",this.state.page);
-        console.log("provider saat ini :",this.state.provider);
+        
         const { error , isLoaded , providerItems , update , count } = this.state;
-        console.log(providerItems)
-        console.log("update : ", update)
-        console.log("page update: ", this.state.pageClicked)
-        console.log("count: ", this.state.count);
-        console.log("rows: ", this.state.rows);
         
         //if error
 
