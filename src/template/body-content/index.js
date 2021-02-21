@@ -3,8 +3,7 @@ import { Route , Router , Switch , useHistory } from 'react-router-dom'
 import Home from './home'
 import Provider from './master-provider'
 import Product from './master-product'
-import AppXtra from '../../AppXtra';
-import Login from '../../login';
+import Transaction from './transaction';
 
 class Body extends Component {
     constructor(props) {
@@ -37,7 +36,12 @@ class Body extends Component {
                         return <Product history={history}/>
                     }
                 }></Route>
-
+                <Route path="/transaction" component={
+                    () => {
+                        let history = useHistory()
+                        return <Transaction history={history}/>
+                    }
+                }></Route>
             </Switch>
         )
     }

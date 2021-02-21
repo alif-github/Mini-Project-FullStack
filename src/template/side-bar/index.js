@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link, link } from 'react-router-dom'
 import './style.css'
 
@@ -41,7 +42,7 @@ class Nav extends Component {
                                 </span>
                             </li>
                         </Link>
-                        <Link>                    
+                        <Link to="/transaction">                    
                             <hr></hr>
                             <li className="has-subnav">
                                 <i className="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
@@ -53,7 +54,7 @@ class Nav extends Component {
                     </ul>
                     <ul className="logout">
                         <li>
-                            <a href="#">
+                            <a onClick={() => this.props.logout()}>
                                 <i className="fa fa-power-off fa-2x"></i>
                                 <span className="nav-text">
                                     Logout
@@ -66,5 +67,13 @@ class Nav extends Component {
          );
     }
 }
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: payload => dispatch({ type: "LOGOUT_SUCCESS"})
+    }
+}
  
-export default Nav;
+export default connect(mapStateToProps , mapDispatchToProps)(Nav);
